@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reverse a Word Using Stack | Data Structures Mini Project | Devamani T</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300f0ff'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="site-nav">
+    <div class="container nav-container">
+      <a href="#hero" class="nav-brand">
+        <div class="brand-icon-wrapper">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">STACK<span class="gradient-text">.DS</span></span>
+          <span class="brand-badge">Mini Project</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#hero" class="active">Home</a></li>
+        <li><a href="#visualizer">Visualizer</a></li>
+        <li><a href="#algorithm">Algorithm</a></li>
+        <li><a href="#complexity">Complexity</a></li>
+        <li><a href="#demo">Working Demo</a></li>
+        <li><a href="#source-code">Source Code</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- Sound FX Toggle Button -->
+        <button id="btn-sound-toggle" class="btn-icon" title="Toggle Sound FX" aria-label="Toggle Sound Effects">
+          <svg id="sound-icon-on" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          </svg>
+          <svg id="sound-icon-off" style="display: none;" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <line x1="23" y1="9" x2="17" y2="15"></line>
+            <line x1="17" y1="9" x2="23" y2="15"></line>
+          </svg>
+        </button>
+
+        <!-- Quick Code Modal Nav Button -->
+        <button id="btn-view-code-nav" class="btn btn-outline btn-sm">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+          </svg>
+          <span>C Code</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero-section">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge-pill">
+          <span class="pulse-dot"></span>
+          <span>DATA STRUCTURES MINI PROJECT • 2026</span>
+        </div>
+
+        <h1 class="hero-title">
+          REVERSE A WORD <br>
+          <span class="gradient-text">USING STACK</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Understanding LIFO (Last In, First Out) through an interactive visualization.
+          Watch individual characters transition between the input word, the linear stack data structure, and the reversed output in real-time.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#visualizer" class="btn btn-primary btn-lg">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="5 3 19 12 5 21 5 3"/>
+            </svg>
+            <span>Launch Visualizer</span>
+          </a>
+
+          <button id="btn-view-code" class="btn btn-secondary btn-lg">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+            <span>View C Source Code</span>
+          </button>
+        </div>
+
+        <!-- Student Details Card -->
+        <div class="student-badge-card">
+          <div class="student-avatar">DT</div>
+          <div class="student-meta">
+            <div class="meta-item">
+              <span class="meta-label">Student Name</span>
+              <span class="meta-value">Devamani T</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Register Number</span>
+              <span class="meta-value mono">RA2511003040024</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Subject</span>
+              <span class="meta-value">Data Structures (DS)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Animated Stack Illustration Hero Graphic -->
+      <div class="hero-illustration">
+        <div class="hero-stack-canvas">
+          <!-- Floating Pills -->
+          <div class="hero-floating-pill hero-pill-top">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+            <span>TOP Pointer (top = 3)</span>
+          </div>
+
+          <div class="hero-floating-pill hero-pill-lifo">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>LIFO Principle Active</span>
+          </div>
+
+          <div class="hero-floating-pill hero-pill-bottom">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+            <span>Array Stack [MAX=100]</span>
+          </div>
+
+          <!-- Stack Container Bucket Graphic -->
+          <div class="hero-stack-bucket">
+            <div class="hero-stack-block">
+              <span>K</span>
+              <span class="block-idx">[3] Top</span>
+            </div>
+            <div class="hero-stack-block">
+              <span>C</span>
+              <span class="block-idx">[2]</span>
+            </div>
+            <div class="hero-stack-block">
+              <span>A</span>
+              <span class="block-idx">[1]</span>
+            </div>
+            <div class="hero-stack-block">
+              <span>T</span>
+              <span class="block-idx">[0] Base</span>
+            </div>
+          </div>
+          <div class="stack-bottom-base"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Stack Visualization Section -->
+  <section id="visualizer" class="visualizer-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Interactive Simulation
+        </div>
+        <h2 class="section-title">Interactive Stack Visualization</h2>
+        <p class="section-subtitle">
+          Input any custom word or choose a preset. Experience atomic character push and pop animations with real-time TOP pointer tracking.
+        </p>
+      </div>
+
+      <div class="visualizer-card">
+        <!-- Control Toolbar Panel -->
+        <div class="viz-controls-panel">
+          <div class="viz-input-group">
+            <div class="input-wrapper">
+              <span class="input-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 7V4h16v3M9 20h6M12 4v16"/>
+                </svg>
+              </span>
+              <input type="text" id="word-input" class="input-field" placeholder="Enter a word (e.g. HELLO, DATA)" value="HELLO" maxlength="10" autocomplete="off" spellcheck="false">
+            </div>
+
+            <button id="btn-reverse" class="btn btn-primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="5 3 19 12 5 21 5 3"/>
+              </svg>
+              <span>Reverse Word</span>
+            </button>
+          </div>
+
+          <!-- Presets -->
+          <div class="viz-presets">
+            <span class="presets-label">Sample Presets:</span>
+            <button class="chip-btn" data-word="DATA">DATA</button>
+            <button class="chip-btn active" data-word="HELLO">HELLO</button>
+            <button class="chip-btn" data-word="STACK">STACK</button>
+            <button class="chip-btn" data-word="RACECAR">RACECAR</button>
+            <button class="chip-btn" data-word="COLLEGE">COLLEGE</button>
+            <button class="chip-btn" data-word="ALGORITHM">ALGORITHM</button>
+            <button class="chip-btn" data-word="LIFO">LIFO</button>
+          </div>
+
+          <!-- Controls Bar (Play/Pause, Step, Reset, Speed) -->
+          <div class="viz-action-bar">
+            <div class="action-buttons-group">
+              <button id="btn-play-pause" class="btn btn-secondary btn-sm">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <rect x="6" y="4" width="4" height="16"/>
+                  <rect x="14" y="4" width="4" height="16"/>
+                </svg>
+                <span>Pause</span>
+              </button>
+
+              <button id="btn-step" class="btn btn-secondary btn-sm" title="Advance one single push or pop step">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="5 4 15 12 5 20 5 4"/>
+                  <line x1="19" y1="5" x2="19" y2="19"/>
+                </svg>
+                <span>Step Forward</span>
+              </button>
+
+              <button id="btn-reset" class="btn btn-outline btn-sm">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                  <path d="M3 3v5h5"/>
+                </svg>
+                <span>Reset</span>
+              </button>
+            </div>
+
+            <!-- Speed Control Slider -->
+            <div class="viz-speed-control">
+              <span class="speed-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Speed:
+              </span>
+              <input type="range" id="speed-slider" class="speed-slider" min="0.5" max="2.5" step="0.25" value="1.0">
+              <span id="speed-val" class="speed-val">1.0x</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visualizer Stage 3-Column Grid -->
+        <div class="viz-stage-grid">
+          
+          <!-- Column 1: Input Word Tape -->
+          <div class="stage-panel">
+            <div class="panel-header">
+              <div class="panel-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg>
+                Input Word Tape
+              </div>
+              <span class="panel-badge">String Buffer</span>
+            </div>
+
+            <div class="string-tape-box">
+              <div id="input-tape" class="string-tape">
+                <!-- Dynamically filled with char cells -->
+              </div>
+            </div>
+
+            <!-- Push Phase Details -->
+            <div class="glass-card" style="padding: 1rem;">
+              <h4 style="font-size: 0.85rem; color: var(--accent-cyan); text-transform: uppercase; margin-bottom: 0.4rem;">Phase 1: Stack Push</h4>
+              <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5;">
+                Every character is scanned from left-to-right (indices <code>0</code> to <code>n-1</code>) and placed on top of the stack array.
+              </p>
+            </div>
+          </div>
+
+          <!-- Column 2: Physical Stack Container Bucket -->
+          <div class="stage-panel stack-stage-wrapper">
+            <div class="stack-status-ribbon">
+              <div class="status-indicator">
+                <span id="stack-status-dot" class="status-dot idle"></span>
+                <span id="stack-status-text">READY</span>
+              </div>
+              <span id="stack-count-badge" class="panel-badge">0 / 10 items</span>
+            </div>
+
+            <!-- Bucket and Dynamic Top Pointer Assembly -->
+            <div class="stack-bucket-assembly">
+              <!-- Left: Top Pointer Track -->
+              <div class="stack-top-track">
+                <div id="top-pointer" class="top-pointer">
+                  <span id="top-pointer-val" class="top-pointer-label">TOP = -1</span>
+                  <span class="top-pointer-arrow">➔</span>
+                </div>
+              </div>
+
+              <!-- Center: Open Bucket -->
+              <div class="stack-bucket-wrapper">
+                <div id="stack-bucket" class="stack-bucket">
+                  <!-- Stack items drop in dynamically -->
+                  <div class="stack-empty-notice">
+                    STACK IS EMPTY<br>
+                    <span style="font-size: 0.65rem; color: #475569;">top = -1</span>
+                  </div>
+                </div>
+                <div class="stack-bottom-base"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 3: Output Tape & LIFO Callout -->
+          <div class="stage-panel">
+            <div class="panel-header">
+              <div class="panel-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                Reversed Word
+              </div>
+              <span class="panel-badge">Output Buffer</span>
+            </div>
+
+            <div class="string-tape-box">
+              <div id="output-tape" class="string-tape">
+                <span style="color: var(--text-muted); font-size: 0.85rem; font-style: italic;">(Awaiting popped characters...)</span>
+              </div>
+            </div>
+
+            <!-- Dynamic LIFO Explanation Card -->
+            <div class="lifo-callout-card">
+              <div class="lifo-tag">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                LIFO Principle in Action
+              </div>
+              <div id="lifo-callout-text" class="lifo-text">
+                Ready to reverse <strong>"HELLO"</strong>. Click <strong>Reverse Word</strong> or <strong>Step Forward</strong> to begin!
+              </div>
+            </div>
+
+            <!-- Live Action Console Log -->
+            <div class="panel-header" style="margin-top: 0.5rem;">
+              <div class="panel-title" style="font-size: 0.8rem;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+                Live Action Console
+              </div>
+            </div>
+            <div id="console-output" class="execution-console">
+              <div class="console-entry"><span class="console-time">[READY]</span> <span class="console-msg">System initialized. Awaiting user action.</span></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Footer Progress Bar -->
+        <div class="viz-footer-progress">
+          <div id="step-progress-text" class="progress-counter-badge">
+            Step 0 of 0 (IDLE)
+          </div>
+          <div class="progress-bar-container">
+            <div id="step-progress-bar" class="progress-bar-fill"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Algorithm Section -->
+  <section id="algorithm" class="algorithm-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
+          Formal Steps
+        </div>
+        <h2 class="section-title">Algorithm Specification</h2>
+        <p class="section-subtitle">
+          The step-by-step procedure implemented by the stack word reversal algorithm.
+        </p>
+      </div>
+
+      <!-- 8 Clear Numbered Step Cards -->
+      <div class="algo-grid">
+        <div class="algo-step-card">
+          <div class="step-card-num">1</div>
+          <h3 class="step-card-title">Start</h3>
+          <p class="step-card-desc">Begin the execution of the program and initialize system memory parameters.</p>
+        </div>
+
+        <div class="algo-step-card">
+          <div class="step-card-num">2</div>
+          <h3 class="step-card-title">Read Input Word</h3>
+          <p class="step-card-desc">Accept the target string or word from standard user input and determine length <code>n</code>.</p>
+        </div>
+
+        <div class="algo-step-card">
+          <div class="step-card-num">3</div>
+          <h3 class="step-card-title">Initialize Empty Stack</h3>
+          <p class="step-card-desc">Create a character array stack and set the stack pointer <code>top = -1</code>.</p>
+        </div>
+
+        <div class="algo-step-card">
+          <div class="step-card-num">4</div>
+          <h3 class="step-card-title">Push Characters</h3>
+          <p class="step-card-desc">Iterate from index <code>0</code> to <code>n-1</code> and call <code>push(str[i])</code> for every character.</p>
+        </div>
+
+        <div class="algo-step-card">
+          <div class="step-card-num">5</div>
+          <h3 class="step-card-title">Pop All Characters</h3>
+          <p class="step-card-desc">While <code>isEmpty()</code> is false, extract characters one by one via <code>pop()</code>.</p>
+        </div>
+
+        <div class="algo-step-card">
+          <div class="step-card-num">6</div>
+          <h3 class="step-card-title">Append Characters</h3>
+          <p class="step-card-desc">Place each successively popped character into consecutive slots of the reversed word string.</p>
+        </div>
+
+        <div class="algo-step-card">
+          <div class="step-card-num">7</div>
+          <h3 class="step-card-title">Display Output</h3>
+          <p class="step-card-desc">Print both the original input word and the newly formed reversed word to verify LIFO accuracy.</p>
+        </div>
+
+        <div class="algo-step-card">
+          <div class="step-card-num">8</div>
+          <h3 class="step-card-title">Stop</h3>
+          <p class="step-card-desc">Terminate the algorithm and return exit code <code>0</code>.</p>
+        </div>
+      </div>
+
+      <!-- Flowchart Ribbon -->
+      <div class="algo-flow-ribbon">
+        <div class="flow-steps-wrapper">
+          <div class="flow-step-node">
+            <span class="node-idx">Step 1</span>
+            <div class="node-label">Start</div>
+          </div>
+          <span class="flow-arrow">➔</span>
+
+          <div class="flow-step-node">
+            <span class="node-idx">Step 2</span>
+            <div class="node-label">Read Word</div>
+          </div>
+          <span class="flow-arrow">➔</span>
+
+          <div class="flow-step-node">
+            <span class="node-idx">Step 3</span>
+            <div class="node-label">top = -1</div>
+          </div>
+          <span class="flow-arrow">➔</span>
+
+          <div class="flow-step-node" style="border-color: var(--accent-blue);">
+            <span class="node-idx" style="color: var(--accent-blue);">Step 4</span>
+            <div class="node-label">Push All (0..n-1)</div>
+          </div>
+          <span class="flow-arrow">➔</span>
+
+          <div class="flow-step-node" style="border-color: var(--accent-purple);">
+            <span class="node-idx" style="color: #d8b4fe;">Step 5 &amp; 6</span>
+            <div class="node-label">Pop &amp; Append</div>
+          </div>
+          <span class="flow-arrow">➔</span>
+
+          <div class="flow-step-node">
+            <span class="node-idx">Step 7</span>
+            <div class="node-label">Display Result</div>
+          </div>
+          <span class="flow-arrow">➔</span>
+
+          <div class="flow-step-node">
+            <span class="node-idx">Step 8</span>
+            <div class="node-label">Stop</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Complexity Analysis Section -->
+  <section id="complexity" class="complexity-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+          Theoretical Analysis
+        </div>
+        <h2 class="section-title">Complexity &amp; Data Structure Analysis</h2>
+        <p class="section-subtitle">
+          Rigorous asymptotic performance evaluation and structural characteristics.
+        </p>
+      </div>
+
+      <!-- 4 Core Metric Cards -->
+      <div class="complexity-grid">
+        <div class="metric-card">
+          <div class="metric-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="metric-label">Time Complexity</div>
+          <div class="metric-value">O(n)</div>
+          <p class="metric-desc">
+            Pushing <code>n</code> elements takes <code>O(n)</code> and popping <code>n</code> elements takes <code>O(n)</code>. Total operations: <code>2n</code> ∈ <code>O(n)</code>.
+          </p>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+          </div>
+          <div class="metric-label">Space Complexity</div>
+          <div class="metric-value">O(n)</div>
+          <p class="metric-desc">
+            Auxiliary memory allocated for the stack array storing <code>n</code> individual characters of the input string.
+          </p>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <div class="metric-label">Data Structure Used</div>
+          <div class="metric-value" style="font-size: 1.8rem;">Stack</div>
+          <p class="metric-desc">
+            Sequential linear data structure adhering strictly to single-ended insertion and deletion via <code>top</code>.
+          </p>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
+          </div>
+          <div class="metric-label">Core Principle</div>
+          <div class="metric-value" style="font-size: 1.8rem;">LIFO</div>
+          <p class="metric-desc">
+            <strong>Last In, First Out</strong>: The element most recently placed onto the stack is invariably the first element removed.
+          </p>
+        </div>
+      </div>
+
+      <!-- Deep Dive Comparison Grid -->
+      <div class="analysis-details-grid">
+        <div class="analysis-info-card">
+          <h4>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+            Why Stack is the Optimal Choice for Word Reversal
+          </h4>
+          <ul class="analysis-list">
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>Natural Reversal:</strong> The LIFO property automatically reverses chronological order without requiring two-pointer pointer swapping or extra arithmetic.</span>
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>Constant Time Operations:</strong> Both <code>push()</code> and <code>pop()</code> execute strictly in <code>O(1)</code> time complexity.</span>
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>Deterministic Footprint:</strong> Array-based implementation eliminates memory pointer overhead of linked nodes (saving 8 bytes per char).</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="analysis-info-card">
+          <h4>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Boundary &amp; Error Handling Conditions
+          </h4>
+          <ul class="analysis-list">
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>Stack Overflow:</strong> Occurs if <code>top == MAX - 1</code>. Prevented by checking capacity in <code>isFull()</code> before attempting any <code>push()</code>.</span>
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>Stack Underflow:</strong> Occurs when <code>top == -1</code> and <code>pop()</code> is invoked. Safely caught by returning null terminator <code>'\0'</code>.</span>
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>Empty Input Guard:</strong> Code sanitizes inputs and handles empty strings gracefully without segmentation faults.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Working Demonstration & Trace Table Section -->
+  <section id="demo" class="demo-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+          Verification
+        </div>
+        <h2 class="section-title">Working Demonstration</h2>
+        <p class="section-subtitle">
+          Standard academic demonstration test case alongside an interactive step-by-step trace table.
+        </p>
+      </div>
+
+      <!-- Sample Execution Banner Requested by Prompt -->
+      <div class="demo-sample-banner">
+        <div class="demo-sample-grid">
+          <div class="sample-block">
+            <span class="block-label">Sample Input Word</span>
+            <span class="block-value highlight-blue">DATA</span>
+          </div>
+
+          <div class="sample-block">
+            <span class="block-label">Stack Push Sequence</span>
+            <span class="block-value">D → A → T → A</span>
+          </div>
+
+          <div class="sample-block">
+            <span class="block-label">Stack Pop Sequence</span>
+            <span class="block-value highlight-purple">A → T → A → D</span>
+          </div>
+
+          <div class="sample-block">
+            <span class="block-label">Reversed Output</span>
+            <span class="block-value highlight-emerald">ATAD</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Dynamic Trace Table Card -->
+      <div class="trace-table-card">
+        <div class="table-header-bar">
+          <h3 id="trace-word-label" style="font-size: 1.15rem; color: #fff;">
+            Execution Trace for: "HELLO"
+          </h3>
+          <span class="panel-badge">Step-by-Step State Inspector</span>
+        </div>
+
+        <div class="table-responsive">
+          <table class="trace-table">
+            <thead>
+              <tr>
+                <th>Step #</th>
+                <th>Operation</th>
+                <th>Character</th>
+                <th>Stack Content [Top ➔ Base]</th>
+                <th>Top Index</th>
+                <th>Reversed Word Buffer</th>
+              </tr>
+            </thead>
+            <tbody id="trace-table-body">
+              <!-- Dynamically populated rows -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dedicated Source Code Section (IMPORTANT) -->
+  <section id="source-code" class="code-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+          Implementation
+        </div>
+        <h2 class="section-title">SOURCE CODE</h2>
+        <p class="section-subtitle">
+          Complete, production-grade C implementation embedded directly within the project. Includes full stack operations, boundary guards, and driver function.
+        </p>
+      </div>
+
+      <!-- Embedded Code Editor Card -->
+      <div class="code-container-card">
+        <!-- Editor Header -->
+        <div class="code-editor-header">
+          <div class="editor-window-controls">
+            <span class="window-dot dot-red"></span>
+            <span class="window-dot dot-yellow"></span>
+            <span class="window-dot dot-green"></span>
+            <div class="editor-file-tab">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              <span>reverse_stack.c</span>
+            </div>
+          </div>
+
+          <div class="editor-actions">
+            <button id="btn-copy-code" class="btn btn-secondary btn-sm" title="Copy C Source Code to Clipboard">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy Code</span>
+            </button>
+
+            <button id="btn-download-c" class="btn btn-primary btn-sm" title="Download reverse_stack.c file">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              <span>Download C File</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Scrollable Code Viewer with Line Numbers and Highlighting -->
+        <div id="inline-code-container" class="code-content-wrapper">
+          <!-- Populated by script.js -->
+        </div>
+
+        <!-- Built-in Interactive C Terminal Simulator -->
+        <div class="c-simulator-panel">
+          <div class="simulator-header">
+            <div class="simulator-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+              In-Browser C Program Terminal Simulator
+            </div>
+            <div style="display: flex; gap: 0.5rem; align-items: center;">
+              <input type="text" id="terminal-input" class="input-field" style="padding: 0.4rem 0.75rem; font-size: 0.85rem; width: 140px;" value="DATA" placeholder="Word...">
+              <button id="btn-run-terminal" class="btn btn-purple btn-sm">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <span>Run C Program</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="terminal-box">
+            <div id="terminal-output" class="term-out">Click "Run C Program" to simulate compilation and execution of reverse_stack.c</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fullscreen C Source Code Modal -->
+  <div id="code-modal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-content-card">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <div class="editor-window-controls">
+            <span class="window-dot dot-red"></span>
+            <span class="window-dot dot-yellow"></span>
+            <span class="window-dot dot-green"></span>
+          </div>
+          <h3>C Source Code — reverse_stack.c</h3>
+        </div>
+        <button id="btn-close-modal" class="btn-icon" aria-label="Close Modal">✕</button>
+      </div>
+
+      <div id="modal-code-container" class="modal-body code-content-wrapper">
+        <!-- Rendered by script.js -->
+      </div>
+
+      <div class="modal-footer">
+        <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);">
+          Devamani T • RA2511003040024 • Data Structures Mini Project
+        </div>
+        <div style="display: flex; gap: 0.75rem;">
+          <button id="btn-copy-code-modal" class="btn btn-secondary btn-sm">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            <span>Copy Code</span>
+          </button>
+          <button id="btn-download-c-modal" class="btn btn-primary btn-sm">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            <span>Download .C File</span>
+          </button>
+          <button id="btn-modal-close-footer" class="btn btn-outline btn-sm">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="brand-text">
+            <span class="brand-title" style="font-size: 1.3rem;">REVERSE A WORD <span class="gradient-text">USING STACK</span></span>
+            <span class="brand-badge" style="font-size: 0.8rem;">Data Structures Mini Project</span>
+          </div>
+          <p class="footer-brand-desc">
+            An interactive educational platform designed to demonstrate the fundamental operations, memory mechanics, and LIFO paradigm of stack data structures.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">Project Sections</h4>
+          <ul class="footer-links-list">
+            <li><a href="#hero">Hero &amp; Overview</a></li>
+            <li><a href="#visualizer">Interactive Stack Visualizer</a></li>
+            <li><a href="#algorithm">8-Step Algorithm</a></li>
+            <li><a href="#complexity">Complexity Analysis</a></li>
+            <li><a href="#demo">Working Demonstration</a></li>
+            <li><a href="#source-code">C Source Code Viewer</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">Student Credentials</h4>
+          <div class="student-credit-box">
+            <div class="student-credit-name">Devamani T</div>
+            <div class="student-credit-reg">Reg No: RA2511003040024</div>
+            <div class="student-credit-sub">Subject: Data Structures (DS)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © 2026 <strong>Reverse a Word Using Stack</strong> — Data Structures Mini Project
+        </div>
+        <div>
+          Developed by <strong>Devamani T</strong> (RA2511003040024)
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main JavaScript File -->
+  <script src="script.js"></script>
+</body>
+</html>

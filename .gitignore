@@ -1,0 +1,32 @@
+# Compiled Object & Binary Files
+*.exe
+*.o
+*.obj
+*.out
+*.app
+
+# Logs and databases
+*.log
+*.sqlite
+
+# OS Generated Files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# IDE & Editor Configurations
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*~
+
+# Temporary & Cache Files
+*.tmp
+*.bak
